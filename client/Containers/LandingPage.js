@@ -20,9 +20,10 @@ function LandingPage() {
         password: document.getElementById('password').value,
       }),
     })
-      //   .then((res) => res.json())
+      .then((res) => res.json())
       .then((res) => {
         if (res.status === 200) {
+          sessionStorage.setItem('username', res.username);
           sessionStorage.setItem('loggedIn', true);
           navigate('/search');
         } else {

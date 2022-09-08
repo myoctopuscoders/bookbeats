@@ -23,12 +23,20 @@ const MusicContainer = (props) => {
   const [currentAlbumObj, setCurrentAlbumObj] = useState(albumData[i]);
 
   const addToFavs = () => {
+    console.log(
+      'in add song to fav',
+      sessionStorage.getItem('username'),
+      currentAlbumObj.name,
+      currentAlbumObj.artist
+    );
     fetch('/api/user/addSong', {
       method: 'POST',
       body: JSON.stringify({
-        songName: `${currentAlbumObj.name}`,
-        songArtist: `${currentAlbumObj.artist}`,
+        username: sessionStorage.getItem('username'),
+        songName: currentAlbumObj.name,
+        songArtist: currentAlbumObj.artist,
       }),
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
     });
     console.log(
       "this function should add to a user's favorite music in the database"
